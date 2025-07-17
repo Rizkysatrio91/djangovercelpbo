@@ -1,0 +1,86 @@
+{% extends 'Tampilanutama_app/base.html' %}
+{% load static %}
+
+{% block title %}{{ site_config.site_name }} - Beranda{% endblock title %}
+
+{% block content %}
+<div class="carousel-container-wrapper animate__animated animate__fadeIn" style="padding: 0">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-indicators">
+            {% for slide in jumbotron_slides %}
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="true" aria-label="Slide {{ forloop.counter }}"></button>
+            {% endfor %}
+        </div>
+        <div class="carousel-inner">
+            {% for slide in jumbotron_slides %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ slide.image.url }}" class="d-block" alt="{{ slide.title|default:'Jumbotron Slide' }}" />
+                <div class="carousel-caption d-none d-md-block">
+                    {% if slide.title %}<h5>{{ slide.title }}</h5>{% endif %}
+                    {% if slide.subtitle %}<p>{{ slide.subtitle }}</p>{% endif %}
+                    {% if slide.link_url %}<a href="{{ slide.link_url }}" class="btn btn-primary mt-2">Selengkapnya</a>{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<section class="kader-count-section py-5" data-aos="fade-up">
+    <div class="container">
+        <h2 class="lead mb-1"><b>Jumlah KADER IMM FTIK</b></h2>
+        <br /><br />
+        <i class="fas fa-users kader-icon"></i>
+        <p class="display-4" id="kader-counter">{{ site_config.total_kader_count }}</p>
+    </div>
+</section>
+
+<section class="ketua-section wow animate__animated animate__fadeInRig">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-4 text-center" data-aos="fade-right" data-aos-delay="200">
+                {% if ketua_info.photo %}<img src="{{ ketua_info.photo.url }}" alt="Foto {{ ketua_info.name }}" class="ketua-photo" />{% endif %}
+            </div>
+            <div class="col-lg-8" data-aos="fade-left
+            " data-aos-delay="400">
+                <div class="ketua-text-container p-3">
+                    <h2 class="ketua-name"><i>{{ ketua_info.name }}</i></h2>
+                    <!-- <h2>Menyongsong IMM Masa Depan</h2> -->
+                    <p>{{ ketua_info.welcome_message|linebreaksbr }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<main class="container my-5">
+    <section class="news-section" id="berita-ikatan-terbaru">
+        <h2 class="text-center mb-5" style="color: #800000" data-aos="fade-up">Berita Ikatan Terbaru</h2>
+        <div class="row g-4">
+            {% for article in recent_news %}
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' %}">
+                <div class="card news-item">
+                    {% if article.thumbnail %}<img src="{{ article.thumbnail.url }}" class="card-img-top" alt="{{ article.title }}" />{% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text text-muted small">{{ article.publish_date|date:"d M Y" }} oleh {{ article.author.username }}</p>
+                        <p class="card-text flex-grow-1">{{ article.content|striptags|truncatewords:20 }}</p>
+                        <a href="{% url 'tampilan_utama_app:news_detail' slug=article.slug %}" class="btn btn-danger btn-sm mt-auto">Baca Selengkapnya</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>Belum ada berita terbaru saat ini.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock content %}

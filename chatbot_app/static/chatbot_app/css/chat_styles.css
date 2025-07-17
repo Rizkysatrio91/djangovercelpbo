@@ -1,0 +1,145 @@
+/* ================================================================
+   GAYA DASAR (UNTUK DESKTOP & LAYAR BESAR)
+   ================================================================ */
+/* Wrapper untuk menengahkan kotak chat di tengah halaman */
+body{
+    background-color: rgba(44, 44, 46, 0.9);
+}
+.chatbot-page-wrapper {
+    padding: 2rem 1rem; /* Jarak atas-bawah dikurangi sedikit */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 150px); /* Kalkulasi tinggi dari viewport dikurangi tinggi header/footer */
+}
+
+/* Chat Container Utama */
+.chat-container {
+    width: 100%;
+    max-width: 850px;
+    background-color: rgba(44, 44, 46, 0.9);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    max-height: 850px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease; /* Transisi halus saat ukuran layar berubah */
+}
+
+/* Header Chat */
+.chat-header {
+    background: linear-gradient(135deg, #a52a2a, #800000);
+    color: white;
+    padding: 20px 25px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+}
+
+.chat-header h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4em;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Area Pesan (Chat Box) */
+.chat-box {
+    font-family: 'Poppins', sans-serif;
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.chat-box::-webkit-scrollbar { width: 6px; }
+.chat-box::-webkit-scrollbar-track { background: transparent; }
+.chat-box::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.2); border-radius: 6px; }
+.chat-box::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 255, 255, 0.4); }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+.chat-message { display: flex; max-width: 80%; align-items: flex-end; gap: 10px; animation: fadeInUp 0.4s ease-out; }
+.chat-message.user { align-self: flex-end; }
+.chat-message.bot { align-self: flex-start; }
+.avatar { width: 36px; height: 36px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 2px solid rgba(255, 255, 255, 0.1); background-color: #ffff; }
+.avatar img { width: 100%; height: 100%; object-fit: contain; }
+.message-bubble { padding: 12px 18px; border-radius: 20px; word-wrap: break-word; font-size: 0.98em; line-height: 1.5; }
+.chat-message.user .message-bubble { background-color: #3a3b3c; color: #e4e6eb; border-bottom-right-radius: 5px; }
+.chat-message.bot .message-bubble { background: linear-gradient(135deg, #a52a2a, #800000); color: white; border-bottom-left-radius: 5px; }
+
+/* Area Input Chat */
+.chat-input { display: flex; align-items: center; padding: 15px 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); background-color: rgba(58, 59, 60, 0.5); flex-shrink: 0; }
+#userInput { font-family: 'Poppins', sans-serif; flex-grow: 1; padding: 12px 20px; border: 1px solid transparent; border-radius: 22px; background-color: #242526; color: #e4e6eb; font-size: 1em; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+#userInput::placeholder { color: #8e8e8e; }
+#userInput:focus { border-color: #a52a2a; box-shadow: 0 0 0 3px rgba(165, 42, 42, 0.3); }
+#sendButton { background: transparent; color: #a52a2a; border: none; border-radius: 50%; cursor: pointer; font-size: 1.5em; width: 44px; height: 44px; margin-left: 12px; display: flex; justify-content: center; align-items: center; transition: background-color 0.2s ease, color 0.2s ease; }
+#sendButton:hover { background-color: #a52a2a; color: white; }
+
+/* Indikator Mengetik */
+.typing-indicator { font-family: 'Poppins', sans-serif; font-style: italic; color: #b0b3b8; padding: 5px 20px; font-size: 0.9em; display: none; background-color: transparent; }
+
+
+/* ================================================================
+   PENYESUAIAN RESPONSIF
+   ================================================================ */
+
+/* --- Tampilan Tablet (Layar di bawah 992px) --- */
+@media (max-width: 991.98px) {
+    .chat-container {
+        max-width: 90%; /* Lebar kontainer menyesuaikan layar */
+        height: 85vh; /* Sedikit lebih tinggi untuk proporsi tablet */
+        max-height: 900px;
+    }
+
+    .chat-header h2 {
+        font-size: 1.3em;
+    }
+}
+
+
+/* --- Tampilan Ponsel (Layar di bawah 768px) --- */
+@media (max-width: 767.98px) {
+    /* Wrapper dibuat penuh tanpa padding agar chat container bisa full-screen */
+    .chatbot-page-wrapper {
+        padding: 0;
+        align-items: flex-start; /* Konten dimulai dari atas */
+    }
+
+    /* Di ponsel, chat container akan menjadi layar penuh seperti aplikasi chat */
+    .chat-container {
+        width: 100%;
+        max-width: 100%;
+        height: calc(100vh - 56px - 48px); /* Tinggi penuh dikurangi tinggi header & footer (perkiraan) */
+        max-height: none;
+        border-radius: 0; /* Hapus sudut melengkung */
+        border: none;
+        box-shadow: none;
+        margin: 0;
+    }
+
+    /* Sesuaikan padding agar tidak terlalu mepet di layar kecil */
+    .chat-header {
+        padding: 15px;
+    }
+    .chat-box {
+        padding: 15px 10px;
+    }
+    .chat-input {
+        padding: 10px 15px;
+    }
+
+    .chat-header h2 {
+        font-size: 1.15em;
+    }
+
+    .message-bubble {
+        font-size: 0.95em;
+    }
+}

@@ -1,0 +1,195 @@
+{% extends 'Tampilanutama_app/base.html' %}
+{% load static %}
+
+{% block extra_css %} {# Pastikan ini extra_css sesuai base.html Anda #}
+    <link rel="stylesheet" href="{% static 'css/organization_structure_styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet"> {# Tambahkan 800 weight jika ingin lebih tebal #}
+{% endblock %}
+
+{% block content %}
+<section id="organization-structure">
+    <div class="container">
+        <div class="org-header fade-in-up"> {# Hapus delay-0-2s dari sini, kita pakai JS #}
+            <div class="header-logos">
+                <img src="{% static 'img/umko.png' %}" alt="Logo UMKO" class="fade-in-left"> {# Hapus delay-0-4s #}
+                <img src="{% static 'img/logo_IMM.png' %}" alt="Logo IMM" class="fade-in-up"> {# Hapus delay-0-6s #}
+                <img src="{% static 'img/logo.png' %}" alt="Logo FTIK" class="fade-in-right"> {# Hapus delay-0-8s #}
+            </div>
+            <h1>STRUKTUR BADAN PENGURUS HARIAN PIMPINAN KOMISIARIAT<br>IKATAN MAHASISWA MUHAMMADIYAH FTIK<br>UNIVERSITAS MUHAMMADIYAH KOTABUMI</h1>
+            <p class="lead">Periode {{ organization_year }}</p>
+        </div>
+
+        <div class="structure-container">
+            {% if hierarchical_data %} {# Menggunakan variabel hierarchical_data dari views.py #}
+                {% for main_category, data_block in hierarchical_data.items %}
+                    <div class="org-level">
+                        <h3 class="main-category-title fade-in-up">{% comment %} Hapus delay-1s {% endcomment %}{{ main_category }}</h3> {# Animasi untuk judul kategori #}
+                        
+                        {% if data_block.type == 'phk' %}
+                            {# Tampilan untuk Pimpinan Harian Komisiariat (Ketua, Sekum, Bendahara Umum) #}
+                            <div class="phk-container d-flex flex-wrap justify-content-center w-100">
+                                {% for member in data_block.members %}
+                                    {# Hapus delay-1-2s dari sini #}
+                                    <div class="member-card phk-card fade-in-up"> {# Animasi untuk card PHK #}
+                                        {# Hapus atau komentari baris ini: <span class="pk-label">PK-IMM FTIK</span> #}
+                                        <div class="card-inner">
+                                            <div class="bg-shape"></div> {# Ini untuk bentuk di belakang foto #}
+                                            <div class="photo-container">
+                                                {% if member.photo %}
+                                                    <img src="{{ member.photo.url }}" alt="{{ member.name }}">
+                                                {% else %}
+                                                    <img src="{% static 'img/default_avatar.png' %}" alt="Default Avatar">
+                                                {% endif %}
+                                            </div>
+                                            <div class="member-info">
+                                                <h5>{{ member.name }}</h5>
+                                                {# Menggunakan method get_full_position_display dari model #}
+                                                <p class="position">{{ member.get_full_position_display }}</p> 
+                                                {% if member.period %}<p class="small-text">{{ member.period }}</p>{% endif %}
+                                                {# Bio/description biasanya hanya untuk posisi utama atau jika ada cukup ruang #}
+                                                {% if member.bio_or_description %}<p class="bio">{{ member.bio_or_description|truncatechars:70 }}</p>{% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% elif data_block.type == 'divisions' %}
+                            {# Tampilan untuk Bidang-Bidang Organisasi #}
+                            <div class="divisions-grid w-100">
+                                {% for division_name, members_list in data_block.data.items %}
+                                    {# Hapus style="animation-delay:..." dan ganti dengan kelas JS untuk staggered delay #}
+                                    <div class="division-box fade-in-up division-animated-item"> {# Tambahkan kelas penanda untuk JS #}
+                                        <h4 class="division-title">{{ division_name }}</h4>
+                                        <div class="division-members d-flex flex-wrap justify-content-center">
+                                            {% for member in members_list %}
+                                                {# Hapus style="animation-delay:..." dan ganti dengan kelas JS untuk staggered delay #}
+                                                <div class="member-card division-member-card fade-in member-animated-item"> {# Tambahkan kelas penanda untuk JS #}
+                                                    {# Hapus atau komentari baris ini: <span class="pk-label">PK-IMM FTIK</span> #}
+                                                    <div class="card-inner">
+                                                        <div class="bg-shape"></div>
+                                                        <div class="photo-container">
+                                                            {% if member.photo %}
+                                                                <img src="{{ member.photo.url }}" alt="{{ member.name }}">
+                                                            {% else %}
+                                                                <img src="{% static 'img/default_avatar.png' %}" alt="Default Avatar">
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="member-info">
+                                                            <h5>{{ member.name }}</h5>
+                                                            {# Menggunakan method get_full_position_display dari model #}
+                                                            <p class="position">{{ member.get_full_position_display }}</p> 
+                                                            {# Untuk anggota bidang, biasanya tidak perlu bio di kartu kecil #}
+                                                            {# comment #}
+                                                            {# if member.bio_or_description #}
+                                                            {# <p class="bio">{{ member.bio_or_description|truncatechars:30 }}</p> #}
+                                                            {# endif #}
+                                                            {# endcomment #}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% elif data_block.type == 'other' %}
+                            {# Tampilan untuk Posisi Lainnya (jika ada) #}
+                            <div class="other-members-container d-flex flex-wrap justify-content-center w-100">
+                                {% for member in data_block.members %}
+                                    <div class="member-card fade-in-up member-animated-item"> {# Hapus delay-0-2s #}
+                                        {# Hapus atau komentari baris ini: <span class="pk-label">PK-IMM FTIK</span> #}
+                                        <div class="card-inner">
+                                            <div class="bg-shape"></div>
+                                            <div class="photo-container">
+                                                {% if member.photo %}
+                                                    <img src="{{ member.photo.url }}" alt="{{ member.name }}">
+                                                {% else %}
+                                                    <img src="{% static 'img/default_avatar.png' %}" alt="Default Avatar">
+                                                {% endif %}
+                                            </div>
+                                            <div class="member-info">
+                                                <h5>{{ member.name }}</h5>
+                                                <p class="position">{{ member.get_full_position_display }}</p>
+                                                {% if member.period %}<p class="small-text">{{ member.period }}</p>{% endif %}
+                                                {% if member.bio_or_description %}<p class="bio">{{ member.bio_or_description|truncatechars:70 }}</p>{% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-12">
+                    <p class="text-center" style="color: var(--white);">Belum ada data struktur organisasi yang tersedia.</p>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="org-footer fade-in-up"> {# Hapus delay-1-5s #}
+            <img src="{% static 'img/footer.png' %}" alt="Footer Logo" class="footer-logo"> 
+            
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const animatedElements = document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right, .fade-in');
+    const divisionBoxes = document.querySelectorAll('.division-box.fade-in-up');
+    const memberCardsInDivisions = document.querySelectorAll('.member-card.member-animated-item'); // Gunakan kelas baru untuk menargetkan anggota bidang
+
+    const observerOptions = {
+        root: null, // Mengamati elemen di dalam viewport browser
+        rootMargin: '0px',
+        threshold: 0.1 // Ketika 10% dari elemen terlihat, pemicu callback
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-viewport');
+                observer.unobserve(entry.target); // Berhenti mengamati setelah animasi dipicu
+            }
+        });
+    }, observerOptions);
+
+    // Amati semua elemen yang sudah memiliki kelas animasi dasar
+    animatedElements.forEach(element => {
+        observer.observe(element);
+    });
+
+    // Terapkan staggered delay untuk division-box
+    divisionBoxes.forEach((box, index) => {
+        box.style.transitionDelay = `${index * 0.15}s`; // Staggered delay 0.15s per division box
+        // Kita juga bisa mengamati box ini, tapi jika mereka awalnya di luar viewport,
+        // observer di atas akan menanganinya. Delay akan diterapkan saat box masuk viewport.
+    });
+
+    // Terapkan staggered delay untuk member-card di dalam divisions-grid
+    // Ini mungkin lebih rumit karena setiap bidang bisa punya banyak anggota
+    // Pendekatan: Lakukan staggered per bidang, atau staggered global untuk semua member-card
+    // Mari kita coba staggered global untuk semua member-card yang ada kelas member-animated-item
+    memberCardsInDivisions.forEach((card, index) => {
+        card.style.transitionDelay = `${index * 0.05}s`; // Staggered delay 0.05s per member card
+        // Amati card ini juga jika Anda ingin mereka muncul saat di-scroll
+        observer.observe(card); 
+    });
+
+
+    // --- Opsional: Anda bisa tambahkan delay manual untuk elemen-elemen paling awal jika perlu ---
+    // Misalnya, logo, judul utama, dll. yang biasanya langsung terlihat
+    // Jika tidak menggunakan delay-kelas CSS dan ingin kontrol JS penuh:
+    document.querySelector('.org-header').style.transitionDelay = '0.2s';
+    document.querySelector('.header-logos img:nth-child(1)').style.transitionDelay = '0.4s';
+    document.querySelector('.header-logos img:nth-child(2)').style.transitionDelay = '0.6s';
+    document.querySelector('.header-logos img:nth-child(3)').style.transitionDelay = '0.8s';
+    document.querySelector('.main-category-title').style.transitionDelay = '1.0s';
+    document.querySelector('.member-card.phk-card').style.transitionDelay = '1.2s'; // Ini jika hanya ada satu
+    document.querySelector('.org-footer').style.transitionDelay = '1.5s';
+
+
+});
+</script>
+{% endblock %}

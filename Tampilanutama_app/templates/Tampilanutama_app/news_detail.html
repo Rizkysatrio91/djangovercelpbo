@@ -1,0 +1,120 @@
+{% extends 'Tampilanutama_app/base.html' %}
+{% load static %}
+
+{# === Mengisi Blok Judul Halaman === #}
+{% block title %}{{ article.title }} | {{ site_config.site_name }}{% endblock title %}
+
+
+{# === Menambahkan CSS Khusus Untuk Halaman Ini === #}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/news_details_styles.css' %}" />
+{% endblock extra_css %}
+
+
+{# === Mengisi Blok Konten Utama === #}
+{% block content %}
+<main class="container pt-5 mb-5">
+  
+  <div class="row">
+    <div class="col-lg-8 wow animate__animated animate__fadeInLeft">
+      <div class="article-main-content">
+        <h1 class="article-title">{{ article.title }}</h1>
+        <p class="article-meta">
+          <i class="fas fa-calendar-alt"></i> Dipublikasikan pada {{ article.publish_date|date:"d F Y" }}
+          <span class="mx-2">|</span>
+          <i class="fas fa-user"></i> oleh {{ article.author.username|default:"Admin" }}
+        </p>
+        {% if article.thumbnail %}
+        <img
+          src="{{ article.thumbnail.url }}"
+          alt="{{ article.title }}"
+          class="img-fluid rounded mb-4"
+        />
+        {% endif %}
+        <div class="article-content">
+          {{ article.content|safe }}
+        </div>
+      </div>
+    </div>
+
+    <aside
+      class="col-lg-4 wow animate__animated animate__fadeInRight"
+      data-wow-delay="0.2s"
+    >
+     <div class="sidebar-widget">
+        <h3 class="widget-title">Bagikan Berita</h3>
+        <div class="social-share">
+          <a
+            href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+            target="_blank"
+            class="share-facebook"
+            ><i class="fab fa-facebook-f"></i>Bagikan ke Facebook</a
+          >
+          <a
+            href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ article.title|urlencode }}"
+            target="_blank"
+            class="share-twitter"
+            ><i class="fab fa-x-twitter"></i>Bagikan ke X (Twitter)</a
+          >
+          <a
+            href="whatsapp://send?text={{ article.title|urlencode }}%20{{ request.build_absolute_uri }}"
+            data-action="share/whatsapp/share"
+            class="share-whatsapp"
+            ><i class="fab fa-whatsapp"></i>Bagikan ke WhatsApp</a
+          >
+          
+          <a href="javascript:void(0);" onclick="shareToInstagram()" class="share-instagram"
+            ><i class="fab fa-instagram"></i>Bagikan ke Instagram</a
+          >
+          
+          <a href="javascript:void(0);" onclick="copyLink()" class="share-copy"
+            ><i class="fas fa-link"></i>Salin Link</a
+          >
+        </div>
+      </div>
+
+      {% if recent_posts %}
+      <div class="sidebar-widget">
+        <h3 class="widget-title">Berita Terbaru</h3>
+        <ul class="recent-posts-list">
+          {% for post in recent_posts %}
+          <li>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </aside>
+  </div>
+</main>
+{% endblock content %}
+
+
+{# === Menambahkan JavaScript Khusus Untuk Halaman Ini === #}
+{% block extra_js %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <script src="{% static 'js/news_details_scripts.js' %}"></script>
+
+  <script>
+    const urlToCopy = '{{ request.build_absolute_uri }}';
+
+    // Fungsi untuk tombol Salin Link biasa
+    function copyLink() {
+      navigator.clipboard.writeText(urlToCopy).then(function() {
+        alert('Tautan berita telah berhasil disalin!');
+      }, function(err) {
+        alert('Gagal menyalin tautan. Coba lagi.');
+      });
+    }
+
+    // Fungsi khusus untuk tombol Instagram
+    function shareToInstagram() {
+      navigator.clipboard.writeText(urlToCopy).then(function() {
+        alert('Tautan telah disalin.\n\nBuka Instagram dan tempel tautan ini di Story atau Bio Anda untuk membagikannya.');
+      }, function(err) {
+        alert('Gagal menyalin tautan. Coba lagi.');
+      });
+    }
+  </script>
+  {% endblock extra_js %}

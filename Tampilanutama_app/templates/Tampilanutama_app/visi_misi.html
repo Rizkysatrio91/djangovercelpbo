@@ -1,0 +1,52 @@
+{% extends 'Tampilanutama_app/base.html' %}
+{% load static %}
+
+{% block title %}Visi & Misi - {{ site_config.site_name }}{% endblock title %}
+
+{# Menambahkan CSS khusus untuk halaman ini #}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/visi_misi_styles.css' %}" />
+{% endblock extra_css %}
+
+{% block content %}
+<div class="visimisi-section container my-5 pt-5">
+  {% if visimisi %}
+    <div class="text-center">
+      <h1 class="visimisi-main-title animate__animated animate__fadeInDown">{{ visimisi.title }}</h1>
+      <hr class="title-divider">
+      
+      {% if visimisi.logo %}
+        <img src="{{ visimisi.logo.url }}" alt="Logo" class="visimisi-logo my-4 animate__animated animate__fadeInDown">
+      {% endif %}
+      
+      {% if visimisi.subtitle %}
+        <p class="visimisi-subtitle animate__animated animate__fadeInDown">{{ visimisi.subtitle }}</p>
+      {% endif %}
+    </div>
+
+    <div class="row mt-5 ">
+      <div class="col-md-6 mb-4 animate__animated animate__fadeInLeft">
+        <div class="visi-column">
+          <h2 class="column-title">{{ visimisi.visi_title }}</h2>
+          <p class="column-content">
+            {{ visimisi.visi_content|safe }}
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-4 animate__animated animate__fadeInRight">
+        <div class="misi-column">
+          <h2 class="column-title">{{ visimisi.misi_title }}</h2>
+          <div class="column-content">
+            {{ visimisi.misi_content|safe }}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="text-center py-5">
+      <p>Konten Visi & Misi belum diatur. Silakan tambahkan melalui halaman admin.</p>
+    </div>
+  {% endif %}
+</div>
+{% endblock content %}

@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>{% block title %}{{ site_config.site_name }}{% endblock title %}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}" />
+    <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}" />
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'favicon/favicon-96x96.png' %}" />
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}" />
+
+    <link rel="stylesheet" href="{% static 'css/home_page_styles.css' %}" />
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    {% if top_bar %}
+    <div class="top-bar animate__animated animate__fadeInDown">
+        <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
+            <div class="contact-info text-center text-lg-start">
+                {% if top_bar.phone_number %}<span><i class="fas fa-phone-alt"></i> {{ top_bar.phone_number }}</span>{% endif %}
+                {% if top_bar.email %}<a href="mailto:{{ top_bar.email }}"><i class="fas fa-envelope"></i> {{ top_bar.email }}</a>{% endif %}
+            </div>
+            <div class="social-media text-center text-lg-end">
+                {% if top_bar.facebook_url %}<a href="{{ top_bar.facebook_url }}" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>{% endif %}
+                {% if top_bar.twitter_url %}<a href="{{ top_bar.twitter_url }}" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>{% endif %}
+                {% if top_bar.instagram_url %}<a href="{{ top_bar.instagram_url }}" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>{% endif %}
+                {% if top_bar.youtube_url %}<a href="{{ top_bar.youtube_url }}" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>{% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                {% if site_config.site_logo %}
+                <img src="{{ site_config.site_logo.url }}" alt="Logo {{ site_config.site_name }}" width="30" height="30" class="d-inline-block align-text-top me-2" />
+                {% endif %}
+                {{ site_config.site_name }}
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% for item in menu_items %}
+                        {% if not item.parent %}
+                            {% if item.children.exists %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown{{ forloop.counter }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ item.title }}
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown{{ forloop.counter }}">
+                                    {% for child in item.children.all %}
+                                    <li><a class="dropdown-item" href="{{ child.get_absolute_url }}">{{ child.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ item.get_absolute_url }}">{{ item.title }}</a>
+                            </li>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main> {# Menambahkan tag <main> untuk praktik terbaik #}
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+    {# --- PERBAIKAN DIMULAI DI SINI --- #}
+    {% block footer %}
+    <footer class="footer-section" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-6 col-md-12 footer-col">
+                    <h5 class="footer-title">Sekretariat</h5>
+                    <ul class="footer-contact-list">
+                        {% if site_config.footer_address %}<li><i class="fas fa-map-marker-alt"></i><span>{{ site_config.footer_address }}</span></li>{% endif %}
+                        {% if site_config.footer_email %}<li><i class="fas fa-envelope"></i><a href="mailto:{{ site_config.footer_email }}">{{ site_config.footer_email }}</a></li>{% endif %}
+                        {% if site_config.footer_phone %}<li><i class="fas fa-phone-alt"></i><span>{{ site_config.footer_phone }}</span></li>{% endif %}
+                        {% if site_config.footer_website %}<li><i class="fas fa-globe"></i><a href="{{ site_config.footer_website }}" target="_blank">{{ site_config.footer_website }}</a></li>{% endif %}
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-12 footer-col">
+                    <h5 class="footer-title">Follow Us</h5>
+                    <div class="social-media-footer">
+                        {% if top_bar.twitter_url %}<a href="{{ top_bar.twitter_url }}" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>{% endif %}
+                        {% if top_bar.facebook_url %}<a href="{{ top_bar.facebook_url }}" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>{% endif %}
+                        {% if top_bar.instagram_url %}<a href="{{ top_bar.instagram_url }}" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>{% endif %}
+                        {% if top_bar.youtube_url %}<a href="{{ top_bar.youtube_url }}" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>{% endif %}
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider" />
+            <div class="row">
+                <div class="col-12">
+                    <p class="copyright-text">{{ site_config.copyright_text }}</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {% endblock footer %}
+    {# --- PERBAIKAN SELESAI DI SINI --- #}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{% static 'js/home_page_scripts.js' %}"></script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

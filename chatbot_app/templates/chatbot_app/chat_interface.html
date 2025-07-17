@@ -1,0 +1,53 @@
+{% extends 'Tampilanutama_app/base.html' %}
+{% load static %}
+
+{# -- Mengisi Judul Halaman di Tab Browser -- #}
+{% block title %}Tanya IMM (AI Cerdas) - {{ site_config.site_name }}{% endblock title %}
+
+{# -- Memuat CSS Khusus Hanya Untuk Halaman Ini -- #}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'chatbot_app/css/chat_styles.css' %}">
+{% endblock extra_css %}
+
+
+{# -- Ini Adalah Konten Utama Halaman Chatbot -- #}
+{% block content %}
+<div class="chatbot-page-wrapper">
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2><i class="fas fa-robot"></i> Tanya Seputar IMM With AI Cerdas</h2>
+        </div>
+        <div class="chat-box" id="chatBox">
+            <div class="chat-message bot">
+                <div class="avatar">
+                    <img src="{% static 'chatbot_app/images/Logo_IMM.png' %}" alt="Bot Avatar" />
+                </div>
+                <div class="message-bubble">
+                    Assalamu'alaikum, Rekan Kaders! Saya AI Cerdas IMM Ada yang bisa saya bantu terkait Ikatan Mahasiswa Muhammadiyah?
+                </div>
+            </div>
+        </div>
+        <div class="typing-indicator" id="typingIndicator">
+            BotIMM sedang mengetik...
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Ketik pertanyaan Anda di sini..." />
+            <button id="sendButton" aria-label="Kirim Pesan">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+{# -- Memuat JavaScript Khusus & Melewatkan URL dari Django -- #}
+{% block extra_js %}
+    {% url 'chatbot_app:chat_api' as api_url %}
+    {{ api_url|json_script:"chat-api-url" }}
+
+    {% static 'chatbot_app/images/Logo_IMM.png' as avatar_url %}
+    {{ avatar_url|json_script:"bot-avatar-url" }}
+
+    <script src="{% static 'chatbot_app/js/chat_scripts.js' %}"></script>
+{% endblock extra_js %}

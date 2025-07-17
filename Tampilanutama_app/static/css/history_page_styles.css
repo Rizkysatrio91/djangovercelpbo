@@ -1,0 +1,101 @@
+/* Tampilanutama_app/static/css/history_page_styles.css */
+
+/* --- IMPORT PALET WARNA DARI organization_structure_styles.css --- */
+@import url('organization_structure_styles.css'); 
+
+body {
+    background: linear-gradient(135deg, var(--white-clean) 0%, var(--soft-gray) 50%, var(--black-soft) 100%);
+    color: var(--black-dark);
+}
+
+.history-section {
+    max-width: 960px;
+    background: linear-gradient(160deg, var(--black-soft) 0%, var(--maroon-dark) 100%); 
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px var(--shadow-strong), inset 0 0 15px var(--fade-dark);
+    border: 2px solid var(--border-alpha);
+    margin: 3rem auto;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.history-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px var(--shadow-strong), inset 0 0 20px var(--fade-dark);
+}
+
+.history-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--gold-accent), var(--gold-light)); 
+}
+
+.history-main-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--gold-light);
+    font-size: 2.2rem;
+    text-shadow: 2px 2px 5px var(--shadow-medium);
+}
+
+.title-divider {
+    width: 100px;
+    height: 4px;
+    margin: 1rem auto;
+    border: none;
+    background: linear-gradient(90deg, var(--gold-accent), var(--gold-light));
+    border-radius: 2px;
+    opacity: 1;
+}
+
+/* Styling untuk konten sejarah */
+.history-content {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--white-clean); /* Warna putih untuk konten */
+    text-align: justify;
+    padding: 1rem 0; /* Memberikan sedikit padding di dalam konten */
+}
+
+/* Pastikan semua tag HTML yang mungkin muncul dari TinyMCE juga diatur warnanya */
+.history-content p, 
+.history-content ul, 
+.history-content ol, 
+.history-content li,
+.history-content strong,
+.history-content em,
+.history-content a {
+    color: var(--white-clean); /* Agar semua elemen teks di dalam konten sejarah berwarna putih */
+    text-shadow: 0.5px 0.5px 1px var(--shadow-light); /* Bayangan teks */
+}
+
+.history-content a {
+    color: var(--gold-light); /* Warna link */
+    text-decoration: underline;
+}
+
+/* Penyesuaian responsif */
+@media (max-width: 767.98px) {
+    .history-section {
+        padding: 1.5rem;
+        margin: 1.5rem auto;
+    }
+    .history-main-title {
+        font-size: 1.8rem;
+    }
+    .history-content {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .history-main-title {
+        font-size: 1.6rem;
+    }
+}

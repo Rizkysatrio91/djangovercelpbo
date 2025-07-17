@@ -1,0 +1,259 @@
+/* Kode CSS Anda */
+body {
+  font-family: "Lato", sans-serif;
+  color: #333;
+  line-height: 1.6;
+  background-color: #f8f9fa;
+  padding-top: 70px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.navbar .navbar-brand,
+.news-item .card-title,
+.carousel-caption h5,
+.kader-count-section .lead,
+.ketua-name,
+.footer-title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+.navbar-scrolled {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15) !important;
+}
+/* Mengatur ukuran font judul di navbar */
+.navbar .navbar-brand {
+    font-size: 1.25rem; /* Ganti nilainya sesuai selera, misal: 1.25rem atau 20px */
+    display: flex;         /* Menggunakan flexbox agar logo dan teks sejajar rapi */
+    align-items: center;   /* Memusatkan logo dan teks secara vertikal */
+}
+
+/* Mengatur ukuran gambar logo di navbar */
+.navbar-brand img {
+    height: 40px;  /* Atur tinggi logo, contoh: 40px */
+    width: auto;   /* Biarkan lebar menyesuaikan agar gambar tidak gepeng */
+    margin-right: 10px; /* Memberi sedikit jarak antara logo dan teks */
+}
+.kader-count-section .display-4,
+.ketua-section h2 {
+  font-weight: 700;
+}
+.top-bar {
+  background-color: #333;
+  color: #f8f9fa;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+}
+.top-bar a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.top-bar a:hover {
+  color: #ffc107;
+}
+.top-bar .contact-info span,
+.top-bar .social-media a {
+  margin: 0 8px;
+}
+.top-bar .contact-info i,
+.top-bar .social-media i {
+  margin-right: 5px;
+}
+
+.navbar {
+    background-image: linear-gradient(90deg, #600000 0%, #a52a2a 50%, #600000 100%);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.navbar .nav-link {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.navbar .navbar-brand {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.navbar .nav-link,
+.navbar .navbar-brand {
+  color: #fff !important;
+  font-weight: 600;
+}
+.navbar .nav-link:hover {
+  color: #ffc107 !important;
+}
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+.carousel-item {
+  height: 600px;
+  background-color: #212529;
+}
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  border-radius: 8px;
+}
+.kader-count-section {
+  background-color: #f0f2f5;
+  padding: 50px 0;
+  text-align: center;
+}
+.kader-count-section .display-4 {
+  font-size: 3.5rem;
+  color: #800000;
+}
+.kader-count-section .lead {
+  font-size: 1.5rem;
+  color: #333;
+}
+.kader-count-section .kader-icon {
+  font-size: 10rem;
+  color: #800000;
+  margin-bottom: 0.5rem;
+}
+/* OPSI 2: DIAGONAL MEWAH (LINEAR GRADIENT) */
+.ketua-section {
+    background-image: linear-gradient(160deg, #420d0f 25%, #800000 65%, #420d0f 95%);
+    color: #fff;
+    padding: 3rem 0;
+    overflow: hidden;
+}
+.ketua-photo {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+}
+.news-item {
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  height: 100%;
+}
+.news-item:hover {
+  transform: translateY(-5px);
+}
+.news-item .card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+.news-item .card-title {
+  color: #800000;
+}
+.footer-section {
+  background:linear-gradient(90deg, #222 0%, #444 50%, #222 100%);
+  color: #fff;
+  padding: 60px 0 20px;
+  font-size: 0.9rem;
+}
+.footer-col {
+  margin-bottom: 30px;
+}
+.footer-contact-list {
+  padding-left: 0;
+  list-style: none;
+}
+.footer-contact-list li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+.footer-contact-list i {
+  margin-right: 15px;
+  margin-top: 4px;
+  color: #800000;
+  width: 20px;
+  text-align: center;
+}
+.footer-section a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-section a:hover {
+  color: #c08402;
+}
+.social-media-footer a {
+  font-size: 1.5rem;
+  margin-right: 20px;
+  color: #fff;
+}
+.social-media-footer a:hover {
+  color: #c08402;
+}
+.footer-divider {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.copyright-text {
+  text-align: left;
+  font-size: 0.8rem;
+  color: #ccc;
+  margin-bottom: 0;
+}
+@media (max-width: 991.98px) {
+  .carousel-item {
+    height: 450px;
+  }
+  .top-bar .container-fluid {
+    flex-direction: column;
+    text-align: center;
+  }
+  .ketua-section {
+    text-align: center;
+  }
+  .ketua-photo {
+    margin-bottom: 1.5rem;
+  }
+}
+@media (max-width: 767.98px) {
+  .carousel-item {
+    height: 300px;
+  }
+  .kader-count-section .display-4,
+  .ketua-section h2 {
+    font-size: 2.2rem;
+  }
+  .kader-count-section .lead {
+    font-size: 1.2rem;
+  }
+  .carousel-item img {
+    max-height: 400px;
+  }
+  .ketua-section {
+    padding: 2rem 1rem;
+  }
+  main.container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .footer-col,
+  .copyright-text {
+    text-align: center;
+  }
+  .footer-contact-list li {
+    justify-content: center;
+  }
+  .social-media-footer {
+    margin-bottom: 20px;
+  }
+}

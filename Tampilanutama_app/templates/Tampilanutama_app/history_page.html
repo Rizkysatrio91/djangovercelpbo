@@ -1,0 +1,31 @@
+{% extends 'Tampilanutama_app/base.html' %}
+{% load static %}
+
+{% block title %}Sejarah - {{ site_config.site_name }}{% endblock title %}
+
+{# Menambahkan CSS khusus untuk halaman ini #}
+{% block extra_css %}
+    {# Anda bisa menggunakan CSS yang sama dengan visi misi jika gayanya mirip #}
+    {# atau buat file CSS baru khusus sejarah jika ingin desain berbeda #}
+    <link rel="stylesheet" href="{% static 'css/history_page_styles.css' %}" /> 
+    {# Jika ingin pakai CSS visi misi: <link rel="stylesheet" href="{% static 'css/visi_misi_styles.css' %}" /> #}
+{% endblock extra_css %}
+
+{% block content %}
+<div class="history-section container my-5 py-5">
+    {% if history_content %}
+        <div class="text-center">
+            <h1 class="history-main-title animate__animated animate__fadeInDown">{{ history_content.title }}</h1>
+            <hr class="title-divider animate__animated animate__fadeIn">
+        </div>
+
+        <div class="history-content mt-4 animate__animated animate__fadeInUp">
+            {{ history_content.content|safe }}
+        </div>
+    {% else %}
+        <div class="text-center py-5">
+            <p>Konten Sejarah belum diatur. Silakan tambahkan melalui halaman admin.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock content %}

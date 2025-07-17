@@ -1,0 +1,145 @@
+/* ================================================================
+    GAYA VISI MISI (VERSI BARU - KEREN & ELEGAN)
+    ================================================================ */
+
+/* --- IMPORT PALET WARNA DARI organization_structure_styles.css --- */
+/* Pastikan path ini benar relatif terhadap visi_misi_styles.css */
+/* Jika visi_misi_styles.css dan organization_structure_styles.css berada di folder yang sama (misal: static/css/) */
+@import url('organization_structure_styles.css'); 
+/* Jika organisasi_structure_styles.css berada di root static/css/ dan visi_misi_styles.css di subfolder */
+/* @import url('/static/css/organization_structure_styles.css'); */ 
+/* Atau jika Anda punya file variabel terpisah, itu lebih baik */
+
+
+body {
+    /* Gradasi background body: Putih ke Hitam (Soft) */
+    background: linear-gradient(135deg, var(--white-clean) 0%, var(--soft-gray) 50%, var(--black-soft) 100%);
+    color: var(--black-dark); /* Default text color agar terbaca di gradasi putih */
+}
+
+/* Efek kartu utama yang ditingkatkan */
+.visimisi-section {
+    max-width: 960px;
+    /* Latar belakang kartu VISI MISI: Sesuaikan dengan warna card di header struktur organisasi */
+    /* Menggunakan gradasi hitam ke maroon yang lebih soft */
+    background: linear-gradient(160deg, var(--black-soft) 0%, var(--maroon-dark) 100%); 
+    padding: 3rem;
+    border-radius: 16px; /* Sudut lebih melengkung */
+    /* Bayangan (shadow) yang lebih kuat dan konsisten dengan desain lain */
+    box-shadow: 0 10px 30px var(--shadow-strong), inset 0 0 15px var(--fade-dark);
+    border: 2px solid var(--border-alpha); /* Border halus */
+    margin: 3rem auto; /* Jarak atas-bawah lebih besar */
+    position: relative; /* Diperlukan untuk garis aksen gradient */
+    overflow: hidden; /* Memastikan garis aksen tidak keluar dari border-radius */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Animasi halus */
+}
+
+/* EFEK INTERAKTIF: Sedikit terangkat saat disentuh kursor */
+.visimisi-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px var(--shadow-strong), inset 0 0 20px var(--fade-dark);
+}
+
+/* MENGGANTI border-top DENGAN GRADIENT BAR MODERN */
+.visimisi-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px; /* Tinggi bar gradient */
+    /* Gradient warna gold/cream agar kontras dengan background card */
+    background: linear-gradient(90deg, var(--gold-accent), var(--gold-light)); 
+}
+
+/* Judul utama halaman */
+.visimisi-main-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--gold-light); /* Warna teks gold untuk judul utama */
+    font-size: 2.2rem;
+    text-shadow: 2px 2px 5px var(--shadow-medium); /* Tambah shadow teks */
+}
+
+/* Garis pemisah di bawah judul utama, dibuat lebih modern */
+.title-divider {
+    width: 100px;
+    height: 4px;
+    margin: 1rem auto;
+    border: none;
+    background: linear-gradient(90deg, var(--gold-accent), var(--gold-light)); /* Gradient gold */
+    border-radius: 2px;
+    opacity: 1;
+}
+
+/* Logo */
+.visimisi-logo {
+    max-height: 200px;
+    width: auto;
+    max-width: 100%;
+    margin-top: 1rem;
+    filter: drop-shadow(0 0 15px var(--gold-light)); /* Tambahkan glow pada logo */
+    transition: transform 0.4s ease;
+}
+.visimisi-logo:hover {
+    transform: scale(1.05);
+}
+
+.visimisi-subtitle {
+    font-size: 0.9rem;
+    color: var(--cream-base); /* Warna teks cream agar terbaca di background gelap */
+}
+
+/* Judul untuk kolom "VISI" dan "MISI" */
+.column-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--gold-light); /* Judul kolom menggunakan warna gold */
+    text-shadow: 1px 1px 3px var(--shadow-medium); /* Tambah shadow teks */
+}
+
+/* Konten Visi dan Misi */
+.column-content {
+    font-size: 1.05rem; /* Sedikit lebih besar untuk kenyamanan membaca */
+    line-height: 1.8;
+    color: var(--white-clean) !important; /* PENTING: Menambahkan !important di sini */
+    text-align: justify;
+    text-shadow: 0.5px 0.5px 1px var(--shadow-light); /* Tambah shadow teks */
+}
+
+.misi-column .column-content {
+    text-align: left; /* Tetap rata kiri untuk daftar */
+}
+
+/* Penyesuaian untuk layar kecil */
+@media (max-width: 767.98px) {
+    .visimisi-section {
+        padding: 1.5rem;
+        margin: 1.5rem auto;
+    }
+    .visimisi-main-title {
+        font-size: 1.8rem; /* Sesuaikan ukuran font di mobile */
+    }
+    .column-title {
+        font-size: 1.3rem; /* Sesuaikan ukuran font di mobile */
+    }
+    .column-content {
+        font-size: 1rem; /* Sesuaikan ukuran font di mobile */
+        color: var(--white-clean) !important; /* PENTING: Menambahkan !important di sini */
+    }
+}
+
+@media (max-width: 576px) {
+    .visimisi-main-title {
+        font-size: 1.6rem; /* Sesuaikan ukuran font di mobile sangat kecil */
+    }
+    .visimisi-logo {
+        max-height: 150px; /* Sesuaikan ukuran logo di mobile sangat kecil */
+    }
+    .column-content {
+        color: var(--white-clean) !important; /* PENTING: Menambahkan !important di sini */
+    }
+}

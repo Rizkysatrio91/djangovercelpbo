@@ -1,0 +1,678 @@
+/* Tampilanutama_app/static/css/organization_structure_styles.css */
+
+/* --- PALET WARNA BARU (Elegant, Soft Maroon & Gold/Cream, Black/White Gradients) --- */
+:root {
+    /* Merah Maroon Inti yang lembut */
+    --maroon-primary: #853347; /* Nada maroon yang hangat dan diredam */
+    --maroon-dark: #6B293A;    /* Maroon yang lebih dalam, kaya, tapi tidak terlalu gelap */
+    --maroon-medium: #A1405C; /* Maroon yang seimbang */
+    --maroon-light: #BD5B78;   /* Maroon yang lebih terang, cenderung ke rose */
+    --maroon-accent: #D97A91; /* Nada raspberry/rose yang lembut untuk highlight */
+
+    /* Aksen Gold / Cream yang Hangat dan Elegan */
+    --gold-accent: #C7953B;    /* Gold yang lebih tua, matte */
+    --gold-light: #E0C070;     /* Gold yang lebih cerah, masih lembut */
+    --cream-base: #F8F4E6;     /* Cream yang hangat */
+    --cream-dark: #EAE6D6;     /* Cream yang sedikit lebih gelap */
+
+    /* Warna Netral */
+    --white-clean: #FDFDFD;   /* Hampir putih, sangat lembut */
+    --off-white: #EFEFEE;     /* Sedikit abu-abu/krem */
+    --soft-gray: #F5F5F5;     /* Abu-abu sangat lembut untuk background umum */
+
+    /* Warna Hitam & Gradasi Baru */
+    --black-soft: #282828;    /* Hitam yang tidak terlalu pekat */
+    --black-dark: #1A1A1A;    /* Hitam yang lebih gelap */
+    --gray-dark: #3F3F3F;     /* Abu-abu gelap */
+    --gray-medium: #555555;   /* Abu-abu sedang */
+
+    /* Transparansi dan Bayangan */
+    --shadow-strong: rgba(0, 0, 0, 0.4);  /* Bayangan agak pekat untuk gelap */
+    --shadow-medium: rgba(0, 0, 0, 0.25);
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --border-alpha: rgba(255, 255, 255, 0.1); /* Border transparan yang halus (cocok untuk gelap) */
+    --fade-light: rgba(255, 255, 255, 0.05); /* Fade sangat lembut */
+    --fade-dark: rgba(0, 0, 0, 0.2);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    /* Gradasi background body: Putih ke Hitam (Soft) */
+    background: linear-gradient(135deg, var(--white-clean) 0%, var(--soft-gray) 50%, var(--black-soft) 100%);
+    margin: 0;
+    padding: 0;
+    color: var(--black-dark); /* Default text color agar terbaca di gradasi putih */
+}
+
+#organization-structure {
+    /* Gradasi section: Dari Putih ke Abu-abu lembut */
+    background: linear-gradient(to bottom right, var(--white-clean) 0%, var(--off-white) 100%);
+    padding: 60px 0; /* Mengurangi padding vertikal dari 80px menjadi 60px */
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 40px var(--shadow-light); /* Inner shadow lembut untuk transisi */
+}
+
+/* Background shapes yang kompleks - disesuaikan agar lembut di background terang */
+#organization-structure::before,
+#organization-structure::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.2; /* Lebih terlihat sedikit */
+    filter: blur(80px); /* Blur yang menyebar */
+    z-index: 0;
+}
+
+#organization-structure::before {
+    top: -200px;
+    left: -200px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle at center, var(--cream-base) 0%, transparent 60%);
+}
+
+#organization-structure::after {
+    bottom: -200px;
+    right: -200px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle at center, var(--maroon-accent) 0%, transparent 60%);
+}
+
+#organization-structure .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Header Organisasi - Gradasi Hitam ke Maroon */
+.org-header {
+    margin-bottom: 40px; /* Mengurangi margin bawah dari 60px menjadi 40px */
+    text-align: center;
+    background: linear-gradient(45deg, var(--black-dark), var(--maroon-dark)); /* Gradasi hitam ke maroon */
+    padding: 30px; /* Mengurangi padding dari 40px menjadi 30px */
+    border-radius: 20px;
+    box-shadow: 0 15px 40px var(--shadow-strong), inset 0 0 20px var(--fade-dark);
+    border: 1px solid var(--border-alpha); /* Border halus */
+}
+
+.header-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px; /* Mengurangi gap antar logo dari 35px menjadi 25px */
+    margin-bottom: 25px; /* Mengurangi margin bawah dari 35px menjadi 25px */
+}
+
+.header-logos img {
+    max-height: 80px; /* Mengurangi tinggi maksimal logo dari 100px menjadi 80px */
+    filter: drop-shadow(0 0 15px var(--gold-light)); /* Glow lebih kuat */
+}
+
+.org-header h1 {
+    font-size: 2.8rem; /* Mengurangi ukuran font dari 3.2rem menjadi 2.8rem */
+    font-weight: 800;
+    color: var(--gold-light); /* Teks gold agar kontras dengan gelap */
+    text-transform: uppercase;
+    letter-spacing: 3px; /* Mengurangi letter-spacing dari 3.5px menjadi 3px */
+    line-height: 1.2; /* Mengurangi line-height dari 1.3 menjadi 1.2 */
+    text-shadow: 4px 4px 10px var(--shadow-strong);
+}
+
+.org-header p.lead {
+    font-size: 1.6rem; /* Mengurangi ukuran font dari 1.8rem menjadi 1.6rem */
+    color: var(--cream-base); /* Teks cream */
+    font-weight: 600;
+    margin-top: 20px; /* Mengurangi margin atas dari 25px menjadi 20px */
+    text-shadow: 2px 2px 5px var(--shadow-medium);
+}
+
+.structure-container {
+    padding: 50px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.org-level {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 70px;
+    position: relative;
+    z-index: 1;
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.1); /* Garis putus-putus di background terang */
+    padding-bottom: 70px;
+}
+
+.org-level:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* Main category title - Gradasi Hitam ke Maroon */
+.main-category-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--black-soft) 0%, var(--maroon-dark) 100%);
+    color: var(--gold-light); /* Teks gold */
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 20px 50px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px var(--shadow-strong), inset 0 0 15px var(--fade-dark);
+    text-shadow: 2px 2px 6px var(--shadow-strong);
+    border: 2px solid var(--gold-accent);
+}
+
+.phk-container {
+    padding: 40px 0;
+    display: flex; /* Tambahkan display flex untuk PHK agar bisa diatur di tengah */
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+
+.divisions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 kolom yang lebarnya sama */
+    gap: 30px; /* Mengurangi gap antar divisi dari 50px menjadi 30px */
+    width: 100%;
+    margin-top: 50px;
+}
+
+/* Division Box - Gradasi Hitam ke Maroon */
+.division-box {
+    background: linear-gradient(160deg, var(--black-soft) 0%, var(--maroon-dark) 100%);
+    border: 2px solid var(--border-alpha);
+    border-radius: 25px;
+    padding: 25px;
+    box-shadow: 0 10px 30px var(--shadow-strong), inset 0 0 15px var(--fade-dark);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.division-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px var(--shadow-strong), inset 0 0 20px var(--fade-dark);
+}
+
+.division-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--gold-light);
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 5px var(--shadow-medium);
+    padding-bottom: 20px;
+    border-bottom: 1px dashed var(--cream-base);
+    word-wrap: break-word;
+}
+
+.division-members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding-top: 20px;
+    width: 100%;
+}
+
+/* Card Anggota - Umum (untuk yang di dalam kotak bidang) - Gradasi Hitam ke Maroon */
+.member-card {
+    width: 150px;
+    height: auto; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+
+    background: linear-gradient(45deg, var(--black-soft), var(--maroon-medium));
+    border: 2px solid var(--gold-accent);
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 8px 20px var(--shadow-medium), inset 0 0 8px var(--fade-dark);
+    color: var(--white-clean);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.member-card:hover {
+    transform: translateY(-5px) scale(1.08);
+    box-shadow: 0 15px 40px var(--shadow-strong), inset 0 0 12px var(--fade-dark);
+}
+
+/* Sesuaikan ukuran card untuk PHK agar lebih besar dan menonjol - Gradasi Hitam ke Maroon */
+.member-card.phk-card {
+    width: 300px;
+    height: auto;
+    margin: 25px;
+    padding: 30px;
+    border-width: 4px;
+    box-shadow: 0 15px 40px var(--shadow-strong), inset 0 0 20px var(--fade-dark);
+    background: linear-gradient(135deg, var(--black-dark), var(--maroon-primary));
+}
+
+/* FOTO: Penyesuaian untuk foto terpotong dan posisi tanpa label PK */
+.member-card .photo-container {
+    width: 100px;
+    height: 100px;
+    margin: 10px auto 5px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--gold-light);
+    box-shadow: 0 4px 10px var(--shadow-medium);
+    position: relative;
+    z-index: 2;
+}
+
+/* Ukuran foto untuk PHK lebih besar */
+.member-card.phk-card .photo-container {
+    width: 170px;
+    height: 170px;
+    border-width: 5px;
+    box-shadow: 0 6px 18px var(--shadow-strong);
+}
+
+.member-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.member-card .member-info {
+    position: relative;
+    z-index: 1;
+    padding: 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+
+.member-card h5 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 2px;
+    color: var(--white-clean);
+    text-shadow: 1px 1px 3px var(--shadow-medium);
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.2;
+    max-height: 2.4em; /* Batasi tinggi agar hanya 2 baris (font-size 1.1rem * 2.18) */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Batasi hingga 2 baris */
+    line-clamp: 2; /* Properti standar */
+    -webkit-box-orient: vertical;
+    width: 100%;
+    padding: 0 5px;
+    box-sizing: border-box;
+}
+
+.member-card p.position {
+    font-size: 0.9rem;
+    color: var(--off-white);
+    margin-bottom: 5px;
+    line-height: 1.2;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px var(--shadow-light);
+    text-align: center;
+    min-height: 1.2em; /* Minimum satu baris */
+    max-height: 2.4em; /* Batasi hingga 2 baris jika posisi panjang */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2; /* Properti standar */
+    -webkit-box-orient: vertical;
+    width: 100%;
+    padding: 0 5px;
+    box-sizing: border-box;
+}
+
+.member-card p.small-text {
+    font-size: 0.9rem;
+    color: var(--off-white);
+    margin-top: 5px;
+    opacity: 0.85;
+}
+
+.member-card p.bio {
+    font-size: 0.95rem;
+    color: var(--off-white);
+    margin-top: 15px;
+    line-height: 1.7;
+    text-shadow: 0.5px 0.5px 1px var(--shadow-light);
+}
+
+/* Footer Organisasi - Gradasi Hitam ke Maroon */
+.org-footer {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-top: 2px dashed var(--border-alpha);
+    background: linear-gradient(135deg, var(--black-dark) 0%, var(--maroon-dark) 100%);
+    box-shadow: inset 0 0 30px var(--shadow-strong);
+    border-radius: 25px;
+}
+
+.org-footer .footer-logo {
+    max-height: 100px;
+    margin: 0 30px 25px;
+    filter: drop-shadow(0 0 15px var(--gold-light));
+}
+
+.org-footer p {
+    font-size: 1.8rem;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 5px var(--shadow-strong);
+}
+
+/* --- CSS ANIMASI (Ditambahkan) --- */
+/* Awal: Elemen tidak terlihat dan sedikit bergeser */
+.fade-in-up, .fade-in-left, .fade-in-right, .fade-in {
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Durasi dan easing umum */
+}
+
+/* Transformasi awal */
+.fade-in-up {
+    transform: translateY(30px);
+}
+.fade-in-left {
+    transform: translateX(-30px);
+}
+.fade-in-right {
+    transform: translateX(30px);
+}
+
+/* Akhir: Elemen terlihat dan kembali ke posisi normal */
+.fade-in-up.in-viewport,
+.fade-in-left.in-viewport,
+.fade-in-right.in-viewport,
+.fade-in.in-viewport {
+    opacity: 1;
+    transform: translate(0, 0); /* Kembali ke posisi asli */
+}
+
+/* Kelas delay-x-xs yang sudah dihapus dari HTML kini tidak relevan di CSS */
+
+
+/* Responsive adjustments */
+@media (max-width: 1200px) { /* Tambahkan breakpoint baru untuk layar yang sedikit lebih kecil dari desktop */
+    .divisions-grid {
+        grid-template-columns: repeat(3, 1fr); /* Tetap 3 kolom untuk transisi lebih halus */
+        gap: 25px; /* Sedikit kurangi gap */
+    }
+    .division-box {
+        padding: 20px;
+    }
+    .member-card {
+        width: 140px; /* Kurangi lebar card sedikit */
+    }
+    .member-card .photo-container {
+        width: 90px;
+        height: 90px;
+    }
+    .member-card h5 {
+        font-size: 1rem;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+    .member-card p.position {
+        font-size: 0.85rem;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+}
+
+@media (max-width: 992px) {
+    .org-header h1 {
+        font-size: 2.5rem;
+        letter-spacing: 2.5px;
+    }
+    .org-header p.lead {
+        font-size: 1.4rem;
+    }
+    .main-category-title {
+        font-size: 2rem;
+        margin-bottom: 40px;
+        padding: 15px 40px;
+    }
+    .phk-container {
+        padding: 20px 0;
+    }
+    .member-card.phk-card {
+        width: 250px;
+        margin: 15px;
+        padding: 25px;
+    }
+    .member-card.phk-card .photo-container {
+        width: 140px;
+        height: 140px;
+    }
+    .divisions-grid {
+        grid-template-columns: repeat(2, 1fr); /* PENTING: Beralih ke 2 kolom di tablet */
+        gap: 30px; /* Sesuaikan gap */
+    }
+    .division-box {
+        padding: 20px;
+        margin-bottom: 20px; /* Jaga margin bawah */
+    }
+    .division-title {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+    }
+    .division-members {
+        gap: 15px;
+        padding-top: 15px;
+    }
+    .member-card {
+        width: 160px; /* Sesuaikan lebar card untuk 2 kolom */
+        padding: 10px;
+    }
+    .member-card .photo-container {
+        width: 100px;
+        height: 100px;
+        margin: 10px auto 5px;
+    }
+    .member-card h5 {
+        font-size: 1.1rem;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+    .member-card p.position {
+        font-size: 0.9rem;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+    .org-footer {
+        margin-top: 60px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        border-radius: 20px;
+    }
+    .org-footer .footer-logo {
+        max-height: 80px;
+        margin-bottom: 20px;
+    }
+    .org-footer p {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .org-header h1 {
+        font-size: 2rem;
+        letter-spacing: 1.8px;
+    }
+    .org-header p.lead {
+        font-size: 1.1rem;
+    }
+    .header-logos {
+        gap: 15px;
+    }
+    .header-logos img {
+        max-height: 60px;
+    }
+    .org-level {
+        margin-bottom: 50px;
+        padding-bottom: 50px;
+    }
+    .main-category-title {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+    .phk-container {
+        flex-direction: column;
+        padding: 0;
+    }
+    .member-card.phk-card {
+        width: 90%;
+        max-width: 350px;
+        margin: 15px auto;
+        padding: 25px;
+    }
+    .member-card.phk-card .photo-container {
+        width: 150px;
+        height: 150px;
+    }
+    .divisions-grid {
+        grid-template-columns: repeat(2, 1fr); /* Tetap 2 kolom */
+        gap: 20px;
+    }
+    .division-box {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    .division-title {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+    }
+    .division-members {
+        gap: 10px;
+        padding-top: 10px;
+    }
+    .member-card {
+        width: 140px; /* Sedikit kecilkan lagi */
+        padding: 8px 5px;
+    }
+    .member-card .photo-container {
+        width: 80px;
+        height: 80px;
+        margin: 8px auto 5px;
+    }
+    .member-card h5 {
+        font-size: 0.9rem;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+    .member-card p.position {
+        font-size: 0.75rem;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+    .org-footer {
+        margin-top: 40px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        border-radius: 15px;
+    }
+    .org-footer .footer-logo {
+        max-height: 70px;
+        margin-bottom: 15px;
+    }
+    .org-footer p {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .org-header h1 {
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+    }
+    .org-header p.lead {
+        font-size: 0.95rem;
+    }
+    .main-category-title {
+        font-size: 1.6rem;
+        margin-bottom: 25px;
+        padding: 15px 30px;
+    }
+    .member-card h5 {
+        font-size: 1.2rem;
+    }
+    .member-card p.position {
+        font-size: 1rem;
+    }
+    .divisions-grid {
+        grid-template-columns: 1fr; /* Beralih ke 1 kolom di mobile */
+        gap: 15px;
+    }
+    .division-box {
+        padding: 12px;
+        margin: 0 auto 10px;
+        max-width: 280px;
+    }
+    .division-box:last-child {
+        margin-bottom: 0;
+    }
+    .division-title {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+    }
+    .division-members {
+        gap: 8px;
+    }
+    .member-card {
+        width: 120px;
+        padding: 5px 3px;
+    }
+    .member-card .photo-container {
+        width: 70px;
+        height: 70px;
+        margin: 5px auto 3px;
+    }
+    .member-card h5 {
+        font-size: 0.85rem;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+    .member-card p.position {
+        font-size: 0.7rem;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+    .org-footer {
+        margin-top: 30px;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        border-radius: 10px;
+    }
+    .org-footer .footer-logo {
+        max-height: 50px;
+        margin-bottom: 10px;
+    }
+    .org-footer p {
+        font-size: 1.2rem;
+    }
+}

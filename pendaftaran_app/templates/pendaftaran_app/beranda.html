@@ -1,0 +1,93 @@
+{% extends 'Tampilanutama_app/base.html' %}
+{% load static %}
+
+{# -- Mengisi Judul Halaman di Tab Browser -- #}
+{% block title %}Sistem Seleksi Berkas Pendaftaran{% endblock title %}
+
+{# -- Memuat CSS Khusus Untuk Halaman Ini -- #}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'pendaftaran_app/css/form_styles.css' %}">
+{% endblock extra_css %}
+
+
+{# -- Ini Adalah Konten Utama Halaman Pendaftaran -- #}
+{% block content %}
+<div class="content-wrapper">
+    <div class="form-container">
+        
+        <div class="form-header">
+            <h1>Seleksi Berkas Pendaftaran BPH PK IMM FTIK</h1>
+        </div>
+
+        <div class="form-body">
+            {% if messages %}
+            <div id="django-messages" style="display: none;">
+                {% for message in messages %}
+                    <span data-tag="{{ message.tags }}" data-message="{{ message }}"></span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <h2>Unggah Berkas Baru</h2>
+            <form
+                method="post"
+                enctype="multipart/form-data"
+                action="{% url 'pendaftaran_app:unggah_berkas' %}"
+            >
+                {% csrf_token %}
+
+                <h3>Informasi Pendaftar</h3>
+                {{ form_pendaftaran.as_p }}
+
+                <h3>Unggah Dokumen PDF</h3>
+                {% if konfigurasi %}
+                <p class="file-limits">
+                    Maksimal {{ konfigurasi.max_pdfs }} file, setiap file maks. {{ konfigurasi.max_pdf_size_mb }} MB.
+                </p>
+                {% endif %} 
+                <p>
+                    <label for="{{ form_pdf.file_pdf.id_for_label }}">{{ form_pdf.file_pdf.label }}</label>
+                    <input
+                        type="file"
+                        name="{{ form_pdf.file_pdf.name }}"
+                        id="{{ form_pdf.file_pdf.id_for_label }}"
+                        multiple
+                        required 
+                    />
+                </p>
+
+                <h3>Unggah Pas Foto</h3>
+                {% if konfigurasi %}
+                <p class="file-limits">
+                    Maksimal {{ konfigurasi.max_photos }} foto, setiap file maks. {{ konfigurasi.max_photo_size_mb }} MB.
+                </p>
+                {% endif %}
+                <p>
+                    <label for="{{ form_foto.pas_foto.id_for_label }}">{{ form_foto.pas_foto.label }}</label>
+                    <input
+                        type="file"
+                        name="{{ form_foto.pas_foto.name }}"
+                        id="{{ form_foto.pas_foto.id_for_label }}"
+                        multiple
+                        accept="image/*"
+                        required
+                    />
+                </p>
+
+                <button type="submit">Unggah</button>
+            </form>
+           
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+{# -- Block extra_js sekarang memuat dua file script -- #}
+{% block extra_js %}
+    {# 1. Tetap muat pustaka SweetAlert2 dari CDN #}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {# 2. Muat file JavaScript lokal Anda #}
+    <script src="{% static 'pendaftaran_app/js/popup_handler.js' %}"></script>
+{% endblock extra_js %}

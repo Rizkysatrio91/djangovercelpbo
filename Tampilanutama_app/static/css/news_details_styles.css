@@ -1,0 +1,190 @@
+/* === TAMBAHAN: CSS untuk menyembunyikan elemen sebelum animasi === */
+.wow {
+  visibility: hidden;
+}
+
+/* ================================================================
+   GAYA DASAR (UNTUK DESKTOP & LAYAR BESAR)
+   ================================================================ */
+body {
+  background-color: #f4f6f9;
+  font-family: "Lato", sans-serif;
+  word-wrap: break-word; /* Memastikan teks panjang tidak merusak layout */
+}
+
+.article-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 2.5rem; /* Ukuran untuk desktop */
+  font-weight: 700;
+  color: #832b1b;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.article-meta {
+  font-size: 0.9rem;
+  color: #6c757d;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.article-meta i {
+  margin-right: 5px;
+}
+
+.article-main-content {
+  background-color: transparent;
+  padding: 2rem; /* Sedikit dikurangi untuk fleksibilitas */
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.article-content {
+  line-height: 1.8;
+  font-size: 1.15rem; /* Ukuran font konten untuk desktop */
+  color: #343a40;
+}
+
+.article-content img, 
+.article-main-content img.img-fluid {
+    max-width: 100%; /* Memastikan gambar di dalam konten juga responsif */
+    height: auto;
+    border-radius: 8px; /* Memberi sudut pada gambar di dalam konten */
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.sidebar-widget {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.widget-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-bottom: 2px solid #800000;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.social-share a {
+  display: block;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  transition: opacity 0.3s;
+  text-align: left;
+}
+
+.social-share a:hover {
+  opacity: 0.85;
+}
+
+.social-share i {
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
+}
+
+.share-facebook {
+  background-color: #1877f2;
+}
+.share-twitter {
+  background-color: #14171a; /* Warna baru X/Twitter */
+}
+.share-whatsapp {
+  background-color: #25d366;
+}
+
+.share-instagram {
+  background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+  cursor: pointer;
+}
+.share-copy {
+  background-color: #6c757d;
+  cursor: pointer;
+}
+
+.recent-posts-list {
+  list-style: none;
+  padding-left: 0;
+}
+.recent-posts-list li {
+  border-bottom: 1px solid #eee;
+  padding: 0.75rem 0;
+}
+.recent-posts-list li:last-child {
+  border-bottom: none;
+}
+.recent-posts-list li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+}
+.recent-posts-list li a:hover {
+  color: #800000;
+}
+
+.back-to-home {
+  display: inline-block;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #800000;
+}
+.back-to-home:hover {
+  text-decoration: underline;
+}
+
+/* ================================================================
+   PENYESUAIAN UNTUK TABLET (Layar di bawah 992px)
+   ================================================================ */
+@media (max-width: 991.98px) {
+  .article-title {
+    font-size: 2.2rem; /* Judul sedikit lebih kecil di tablet */
+    line-height: 1.3;
+  }
+
+  .article-content {
+    font-size: 1.1rem; /* Konten sedikit lebih kecil di tablet */
+  }
+}
+
+/* ================================================================
+   PENYESUAIAN UNTUK PONSEL (Layar di bawah 768px)
+   ================================================================ */
+@media (max-width: 767.98px) {
+  .article-title {
+    font-size: 1.8rem; /* Judul lebih kecil lagi di ponsel */
+  }
+
+  .article-main-content {
+    padding: 1.5rem 1rem; /* Padding horizontal dikurangi agar tidak sempit */
+  }
+
+  .article-content {
+    font-size: 1rem; /* Ukuran font konten ideal untuk ponsel */
+  }
+
+  .sidebar-widget {
+    margin-top: 2rem; /* Memberi jarak saat sidebar pindah ke bawah */
+  }
+
+  .article-meta .mx-2 {
+    display: none; /* Sembunyikan pemisah "|" di mobile */
+  }
+
+  .article-meta {
+    display: flex; /* Gunakan flexbox */
+    flex-direction: column; /* Susun ke bawah */
+    align-items: flex-start; /* Rata kiri */
+    gap: 0.5rem; /* Beri jarak antar item */
+  }
+}
