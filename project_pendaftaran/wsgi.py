@@ -1,10 +1,11 @@
 import os
 
 from django.core.wsgi import get_wsgi_application
-from whitenoise import WhiteNoise # <--- TAMBAHAN INI
+from whitenoise import WhiteNoise
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project_pendaftaran.settings')
 
-application = get_wsgi_application()
-# <--- TAMBAHAN BARIS INI UNTUK WHITENOISE
-application = WhiteNoise(application, root=os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'staticfiles'))
+# Ubah 'application' menjadi 'handler' di baris ini
+handler = get_wsgi_application()
+# Ubah 'application' menjadi 'handler' di baris ini
+handler = WhiteNoise(handler, root=os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'staticfiles'))
