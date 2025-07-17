@@ -29,3 +29,4 @@ staticfiles/ # Penting: folder ini akan dibuat oleh collectstatic
 .vercel/ # Folder konfigurasi Vercel lokal
 .vscode/ # Folder konfigurasi VS Code lokal (opsional, tergantung preferensi)
 .env # Penting: Jangan pernah push file .env Anda!
+media/
