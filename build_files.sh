@@ -2,15 +2,19 @@
 # build_files.sh
 
 echo "Installing dependencies from requirements.txt..."
-# Menggunakan python3.10 sesuai dengan runtime di vercel.json
-python3.10 -m pip install -r requirements.txt
+# Menggunakan 'python' saja, bukan 'python3.10'
+python -m pip install -r requirements.txt
 
 echo "Collecting static files..."
-# --noinput: tidak meminta konfirmasi
-# --clear: menghapus file statis lama sebelum mengumpulkan yang baru
-python3.10 manage.py collectstatic --noinput --clear
+# Menggunakan 'python' saja
+python manage.py collectstatic --noinput --clear
 
 echo "Running database migrations..."
-python3.10 manage.py migrate
+# Menggunakan 'python' saja
+python manage.py migrate
+
+echo "Loading initial data from databackup_final.json..."
+# Menggunakan 'python' saja
+python manage.py loaddata databackup_final.json
 
 echo "Build process complete."
