@@ -7,7 +7,7 @@
       "config": {
         "maxLambdaSize": "15mb",
         "runtime": "python3.10",
-        "handler": "project_pendaftaran/wsgi.py"
+        "handler": "project_pendaftaran.wsgi.application" // <--- UBAH NILAI HANDLER INI
       }
     },
     {
